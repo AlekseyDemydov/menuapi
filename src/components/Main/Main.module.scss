@@ -1,0 +1,94 @@
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Центрує вміст
+}
+
+.accordion {
+  width: 100%; // Динамічна ширина залежно від .main
+}
+
+.accordionItem,
+.accordionSubItem {
+  width: 100%;
+}
+
+.trigger,
+.subTrigger {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5f5f500;
+  border: none;
+  cursor: pointer;
+}
+
+.content,
+.subContent {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  // border-left: 1px solid #ddd;
+  // border-right: 1px solid #ddd;
+  @media (min-width: 320px) and (max-width: 480px) {
+    padding: 0;
+  }
+}
+.categoryTitle {
+  margin: 0;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid black;
+  color: white;
+  background-color: #da1b5c;
+  font-family: 'YsabeauSCMedium';
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+  @media (min-width: 320px) and (max-width: 480px) {
+    font-size: 19px;
+  }
+}
+
+.subcategoryTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: left;
+  color: white;
+  font-family: 'YsabeauSCMedium';
+  text-transform: uppercase;
+  background-color: #da1b5b81;
+  border-radius: 10px;
+  padding: 5px ;
+  width: 500px;
+  text-align: center;
+}
+
+.animatedContent {
+  overflow: hidden; // Забезпечує плавність розгортання
+  position: relative;
+  z-index: 1; // Контент позаду
+}
+
+
+.evo {
+  font-family: 'madeevolvesansevoMedium';
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.karaoke{
+  margin-top: 10px;
+  font-size: 18px;
+}
+.krush{
+  font-size: 18px;
+}

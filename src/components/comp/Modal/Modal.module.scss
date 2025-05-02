@@ -1,0 +1,206 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Темний напівпрозорий фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    align-items: flex-end; /* Вирівнюємо модалку до низу */
+  }
+}
+
+
+.modal {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Завжди центруємо по горизонталі */
+  background-color: #000; /* Білий фон модального вікна */
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 450px; /* Максимальна ширина */
+  padding: 20px;
+  text-align: center;
+
+  animation: slideUp 0.4s ease-out;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 100%;
+    animation: slideUpMobile 0.4s ease-out;
+  }
+}
+
+@keyframes slideUpMobile {
+  from {
+    transform: translate(-50%, 100%); /* Починає за межами екрану */
+  }
+  to {
+    transform: translate(-50%, 0); /* Завершує в потрібній позиції */
+  }
+}
+
+
+.itemTitle {
+  font-size: 1.3rem; /* Зменшено розмір тексту */
+  font-weight: bold;
+  color: #ffffff;
+  margin: 10px 0;
+  font-family: 'YsabeauSCMedium';
+  text-transform: uppercase;
+}
+.itemPrice {
+  font-size: 1.3rem; /* Зменшено розмір тексту */
+  font-weight: bold;
+  color: #ffffff;
+  margin: 10px 0;
+  font-family: 'YsabeauSCMedium';
+}
+.itemText {
+  font-size: 0.95rem; /* Зменшено розмір опису */
+  color: #ffffff;
+  margin: 15px 0;
+  font-family: 'YsabeauSCMedium';
+}
+
+.imgSize {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+}
+.imgSizeCoct {
+  width: auto;
+  height: 50vh;
+  border-radius: 10px;
+  margin: 15px auto;
+  border: 1px solid #ddd;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  background: #ffffff;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: #f70a0a;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+.mod{
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.677);
+  width: 270px;
+  margin-top: 15px;
+  border-radius: 10px;
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 230px;
+    
+  }
+}
+.imgModal{
+  position: absolute;
+  z-index: 90;
+  border-radius: 10px;
+  // width: 400px;
+  // height: 700px;
+  @media (min-width: 320px) and (max-width: 480px) {
+    // width: 215px;
+    top: 0;
+    width: 315px;
+    height: 525px;
+    
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #f00;
+  }
+}

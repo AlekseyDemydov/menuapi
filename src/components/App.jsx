@@ -1,16 +1,31 @@
+import React from 'react';
+import { CartProvider } from 'react-use-cart';
+import { Navigate, Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import Header from './Header/Header';
+import Main from './Main/Main';
+import s from './App.module.scss';
+import Admin from './Admin/Admin';
+import { Layout } from './Layout/Layout';
+import Login from './Login/Login';
+import Register from './Registration/Register';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Router>
+      <Header />
+      <div className={s.container}>
+        <CartProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Main />} />
+              <Route path="admin" element={<Admin />} />
+              <Route path="auth/login" element={<Login />} />
+              <Route path="auth/register" element={<Register />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </CartProvider>
+      </div>
+    </Router>
   );
 };

@@ -1,4 +1,6 @@
 @import-normalize; /* bring in normalize.css styles */
+@import "https://fonts.fontstorage.com/import/madeevolvesansevo.css";
+@import "https://fonts.fontstorage.com/import/sansation.css";
 
 body {
   margin: 0;
@@ -7,9 +9,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./components/img/fon.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+@font-face {
+  font-family: SansationLight;
+  src: url('./components/fonts/SansationLight.ttf');
+  
+}
+@font-face {
+  font-family: YsabeauSCMedium;
+  src: url('./components/fonts/YsabeauSCMedium.ttf');
+  
+}
+@font-face {
+  font-family: madeevolvesansevoMedium;
+  src: url('./components/fonts/madeevolvesansevoMedium.otf');
+  
+}
+
+.number {
+  margin-left: 0.5em; /* Відступ зліва */
+  text-transform: lowercase;
 }

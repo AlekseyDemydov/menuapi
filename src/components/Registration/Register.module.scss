@@ -1,0 +1,88 @@
+.register {
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  
+    &__form {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  
+      @media (max-width: 480px) {
+        padding: 24px 20px;
+      }
+    }
+  
+    &__title {
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 28px;
+      color: #2c3e50;
+    }
+  
+    &__group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+  
+    &__label {
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: #34495e;
+    }
+  
+    &__input {
+      padding: 12px 14px;
+      border: 1px solid #dcdfe6;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: 0.2s;
+  
+      &:focus {
+        border-color: #6c63ff;
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        outline: none;
+      }
+    }
+  
+    &__button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6c63ff, #836fff);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+  
+      &:hover {
+        background: linear-gradient(135deg, #5e56e7, #725bf9);
+      }
+  
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  
+    &__message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+  
+      &--error {
+        color: #e74c3c;
+      }
+  
+      &--success {
+        color: #2ecc71;
+      }
+    }
+  }
+  

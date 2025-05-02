@@ -1,0 +1,114 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Відстань між елементами списку */
+    width: 100%;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Елементи вирівнюються в рядок */
+    gap: 20px; /* Відстань між картинкою і текстом */
+    padding: 15px;
+    // width: 100%;
+    // max-width: 600px;
+    // background-color: #fff;
+    // border: 1px solid #ddd;
+    // border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  .itemBox{
+    width: 100%;
+  }
+  .sizeImg {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .itemMain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-family: 'YsabeauSCMedium';
+ 
+    @media (min-width: 320px) and (max-width: 760px) {
+        font-size: 10px;
+        max-width: 230px;
+      }
+  }
+  .beer{
+    @media (min-width: 320px) and (max-width: 760px) {
+        min-width: 175px;
+      }
+  }
+  .widthPrice{
+    @media (min-width: 320px) and (max-width: 760px) {
+        min-width: 87px;
+      }
+  }
+  .boxPrice{
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+  }
+  .newWord {
+    margin-left: 10px;
+    background-color: #ff6347;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 5px;
+    text-transform: uppercase;
+  }
+  
+  .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px;
+    font-family: 'YsabeauSCMedium';
+  // text-transform: uppercase;
+    @media (min-width: 320px) and (max-width: 590px) {
+        font-size: 13px;
+        width: 80px;
+      }
+  }
+  
+  .text {
+    font-size: 15px;
+    color: #ffffff;
+    margin-top: 5px;
+    font-family: 'YsabeauSCMedium';
+    text-transform: lowercase;
+    @media (min-width: 320px) and (max-width: 590px) {
+      font-size: 10px;
+    }
+  }
+ .music{
+  display: none;
+ }

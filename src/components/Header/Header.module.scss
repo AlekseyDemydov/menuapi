@@ -1,0 +1,32 @@
+.link {
+  display: flex;
+  margin-left: auto;
+  margin-right: 45px;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: rgba(255, 166, 0, 0.33);
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 44px;
+    height: 44px;
+    margin-right: 15px;
+  }
+}
+.icon {
+  @media (min-width: 320px) and (max-width: 480px) {
+    height: 30px;
+    width: 30px;
+  }
+  height: 45px;
+  width: 45px;
+  fill: #0f0e0d;
+}
+.logo{
+  height: 70px;
+  @media (min-width: 320px) and (max-width: 480px) {
+    height: 50px;
+    margin-left: auto;
+  }
+}
