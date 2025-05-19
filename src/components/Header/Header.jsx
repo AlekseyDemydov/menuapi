@@ -11,10 +11,24 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import s from './Header.module.scss';
 import logo from './img/Logo.png'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+      const { isAuth, setIsAuth, fullName, setFullName } = useAuth();
+const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("fullName");
+    localStorage.removeItem("userId");
+    setIsAuth(false);
+    setFullName("");
+    navigate("/"); // можеш змінити на "/auth/login" або інше
+  };
+const handleSignIn = () => {
+    navigate('/auth/login');
+  };
   const toggleDrawer = open => () => {
     setDrawerOpen(open);
   };
@@ -85,6 +99,17 @@ const Header = () => {
             </IconButton>
           </Box>
           <img src={logo} alt="logo" className={s.logo}/>
+          {isAuth ? (
+        <div>
+          <p>Ласкаво просимо, {fullName}!</p>
+          <button onClick={handleLogout}>Вийти</button>
+        </div>
+      ) : (
+        <button type="button" onClick={handleSignIn}>
+          signIn
+        </button>
+      )}
+          
         </Toolbar>
        
       </AppBar>

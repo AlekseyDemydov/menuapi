@@ -8,9 +8,11 @@ import Admin from './Admin/Admin';
 import { Layout } from './Layout/Layout';
 import Login from './Login/Login';
 import Register from './Registration/Register';
+import { AuthProvider } from './context/AuthContext';
 
 export const App = () => {
   return (
+    <AuthProvider>
     <Router>
       <Header />
       <div className={s.container}>
@@ -27,5 +29,6 @@ export const App = () => {
         </CartProvider>
       </div>
     </Router>
+    </AuthProvider>
   );
 };

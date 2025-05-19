@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Accordion, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+} from '@radix-ui/react-accordion';
 import { List } from 'components/comp/List/List';
 import { Modal } from 'components/comp/Modal/Modal';
 import axios from 'axios';
 import config from 'config';
 import s from './Main.module.scss';
+import { Loader } from 'components/comp/Loader/Loader';
 
 const AnimatedAccordionContent = ({ children, isOpen }) => (
   <motion.div
     initial={{ height: 0, opacity: 0 }}
-    animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+    animate={
+      isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }
+    }
     transition={{ duration: 0.3, ease: 'easeInOut' }}
     className={s.animatedContent}
   >
@@ -30,6 +37,7 @@ const Main = () => {
     const fetchMenuData = async () => {
       try {
         const response = await axios.get(`${config.baseURL}/api/products`);
+
         setMenuData(response.data);
       } catch (error) {
         console.error('Error fetching menu data:', error);
@@ -67,7 +75,7 @@ const Main = () => {
   return (
     <div className={s.main}>
       {isLoading ? (
-        <p className={s.loading}>Завантаження меню...</p>
+        <Loader />
       ) : (
         <Accordion type="multiple" collapsible className={s.accordion}>
           {menuData.map((category, categoryIndex) => (
@@ -86,12 +94,25 @@ const Main = () => {
                   {category.category}
                 </h2>
               </AccordionTrigger>
-              <AnimatedAccordionContent isOpen={!!openCategories[categoryIndex]}>
+              <AnimatedAccordionContent
+                isOpen={!!openCategories[categoryIndex]}
+              >
                 {category.category === 'Банкетне меню' ? (
                   <List
                     data={category.subcategories.flatMap(sub => sub.items)}
+                    subcategory={category.subcategories[0]?.subcategory || ''}
+                    categoryId={category._id}
+                    subcategoryId={category.subcategories[0]?._id || ''}
                     onModal={(title, price, text, src, description, zvd) =>
-                      dataModal(title, price, text, src, category.category, description, zvd)
+                      dataModal(
+                        title,
+                        price,
+                        text,
+                        src,
+                        category.category,
+                        description,
+                        zvd
+                      )
                     }
                     category={category.category}
                   />
@@ -105,22 +126,43 @@ const Main = () => {
                       >
                         <AccordionTrigger
                           className={s.subTrigger}
-                          onClick={() => handleToggleSubcategory(categoryIndex, subIndex)}
+                          onClick={() =>
+                            handleToggleSubcategory(categoryIndex, subIndex)
+                          }
                         >
                           <h3 className={s.subcategoryTitle}>
                             {subcategory.subcategory}
                           </h3>
                         </AccordionTrigger>
                         <AnimatedAccordionContent
-                          isOpen={!!openSubcategories[`${categoryIndex}-${subIndex}`]}
+                          isOpen={
+                            !!openSubcategories[`${categoryIndex}-${subIndex}`]
+                          }
                         >
                           <List
                             data={subcategory.items}
-                            onModal={(title, price, text, src, description, zvd) =>
-                              dataModal(title, price, text, src, category.category, description, zvd)
+                            onModal={(
+                              title,
+                              price,
+                              text,
+                              src,
+                              description,
+                              zvd
+                            ) =>
+                              dataModal(
+                                title,
+                                price,
+                                text,
+                                src,
+                                category.category,
+                                description,
+                                zvd
+                              )
                             }
                             subcategory={subcategory.subcategory}
                             category={category.category}
+                            categoryId={category._id}
+                            subcategoryId={subcategory._id}
                           />
                         </AnimatedAccordionContent>
                       </AccordionItem>

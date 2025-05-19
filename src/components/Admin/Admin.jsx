@@ -2,8 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import config from 'config';
 import s from './Admin.module.scss';
+import { Loader } from 'components/comp/Loader/Loader';
 
 const Admin = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,6 +59,8 @@ const Admin = () => {
       } catch (error) {
         console.error('Помилка при завантаженні даних:', error);
         alert('Не вдалося завантажити продукти.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -277,7 +281,10 @@ const Admin = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredProducts.map((product, index) => (
+          {isLoading ? (
+                  <Loader/>
+                ) : (
+                  filteredProducts.map((product, index) => (
             <tr key={product._id}>
               <td>
                 <img
@@ -304,7 +311,36 @@ const Admin = () => {
                 <button onClick={() => handleDelete(product)}>Видалити</button>
               </td>
             </tr>
-          ))}
+          ))
+                )}
+          {/* {filteredProducts.map((product, index) => (
+            <tr key={product._id}>
+              <td>
+                <img
+                  src={`${config.baseURL}${product.src}`}
+                  alt={product.title}
+                  className={s.tableImage}
+                  crossOrigin="anonymous"
+                  loading="lazy"
+                />
+              </td>
+              <td>{product.title}</td>
+              <td>{product.price}</td>
+              <td>{product.price2}</td>
+              <td>{product.category}</td>
+              <td>{product.subcategory}</td>
+              <td>{product.text}</td>
+              <td>{product.description}</td>
+              <td>{product.zvd}</td>
+              <td>{product.isNew ? 'Так' : 'Ні'}</td>
+              <td>
+                <button onClick={() => openModal(product)}>Редагувати</button>
+              </td>
+              <td>
+                <button onClick={() => handleDelete(product)}>Видалити</button>
+              </td>
+            </tr>
+          ))} */}
         </tbody>
       </table>
 

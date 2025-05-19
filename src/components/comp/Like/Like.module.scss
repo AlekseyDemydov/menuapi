@@ -1,0 +1,30 @@
+.likeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  color: #999;
+  user-select: none;
+
+  &.liked {
+    color: #e0245e;
+  }
+
+  &.unliked:hover {
+    color: #e0245e;
+  }
+}
+
+.likesCount {
+  display: inline-block;
+  min-width: 20px;
+  text-align: left;
+  font-weight: 600;
+  line-height: 1;
+  user-select: none;
+}
