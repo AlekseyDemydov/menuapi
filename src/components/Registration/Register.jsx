@@ -1,30 +1,56 @@
-import React, { useState } from "react";
-import s from "./Register.module.scss";
-import axios from "axios";
-import config from "config";
+import React, { useState } from 'react';
+import s from './Register.module.scss';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import config from 'config';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: ""
+    fullName: '',
+    email: '',
+    password: '',
   });
-  const [message, setMessage] = useState({ text: "", type: "" });
-
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const [message, setMessage] = useState({ text: '', type: '' });
+  const navigate = useNavigate();
+  const handleChange = e => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setMessage({ text: "", type: "" });
+    setMessage({ text: '', type: '' });
 
     try {
-      const response = await axios.post(`${config.baseURL}/auth/register`, formData);
-      setMessage({ text: "Реєстрація успішна!", type: "success" });
-      localStorage.setItem("token", response.data.token);
+      const response = await axios.post(
+        `${config.baseURL}/auth/register`,
+        formData
+      );
+      setMessage({ text: 'Реєстрація успішна!', type: 'success' });
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('fullName', response.data.user.fullName);
+      localStorage.setItem('userId', response.data.user._id);
+      setTimeout(() => {
+        navigate('/');
+      }, 400);
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
-      setMessage({ text: error.response?.data?.message || "Помилка при реєстрації", type: "error" });
+      if (error.response) {
+        const errMsg = error.response.data.message || '';
+
+        if (errMsg.toLowerCase().includes('email')) {
+          setMessage({ text: 'Цей email вже зареєстрований', type: 'error' });
+        } else {
+          setMessage({
+            text: errMsg || 'Помилка при реєстрації',
+            type: 'error',
+          });
+        }
+      } else {
+        setMessage({ text: 'Помилка при реєстрації', type: 'error' });
+      }
     }
   };
 
@@ -34,7 +60,9 @@ const Register = () => {
         <h2 className={s.register__title}>Реєстрація</h2>
 
         <div className={s.register__group}>
-          <label className={s.register__label} htmlFor="fullName">Ім’я</label>
+          <label className={s.register__label} htmlFor="fullName">
+            Ім’я
+          </label>
           <input
             className={s.register__input}
             type="text"
@@ -47,7 +75,9 @@ const Register = () => {
         </div>
 
         <div className={s.register__group}>
-          <label className={s.register__label} htmlFor="email">Email</label>
+          <label className={s.register__label} htmlFor="email">
+            Email
+          </label>
           <input
             className={s.register__input}
             type="email"
@@ -60,7 +90,9 @@ const Register = () => {
         </div>
 
         <div className={s.register__group}>
-          <label className={s.register__label} htmlFor="password">Пароль</label>
+          <label className={s.register__label} htmlFor="password">
+            Пароль
+          </label>
           <input
             className={s.register__input}
             type="password"
@@ -72,10 +104,14 @@ const Register = () => {
           />
         </div>
 
-        <button type="submit" className={s.register__button}>Зареєструватись</button>
+        <button type="submit" className={s.register__button}>
+          Зареєструватись
+        </button>
 
         {message.text && (
-          <p className={`${s.register__message} ${s[`register__message--${message.type}`]}`}>
+          <p
+            className={`${s.register__message} ${s[`register__message--${message.type}`]}`}
+          >
             {message.text}
           </p>
         )}

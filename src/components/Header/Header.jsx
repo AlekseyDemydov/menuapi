@@ -10,55 +10,90 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import s from './Header.module.scss';
-import logo from './img/Logo.png'
+import logo from './img/Logo.png';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from '../context/AuthContext';
+import { useLocation } from 'react-router-dom';
+import LogoutButton from 'components/comp/LogoutBtn/LogoutButton';
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-      const { isAuth, setIsAuth, fullName, setFullName } = useAuth();
-const navigate = useNavigate();
+  const { isAuth, setIsAuth, fullName, setFullName } = useAuth();
+  const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("fullName");
-    localStorage.removeItem("userId");
+    localStorage.removeItem('token');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('userId');
     setIsAuth(false);
-    setFullName("");
-    navigate("/"); // можеш змінити на "/auth/login" або інше
+    setFullName('');
+    navigate('/'); // можеш змінити на "/auth/login" або інше
   };
-const handleSignIn = () => {
+  const location = useLocation();
+  const handleSignIn = () => {
     navigate('/auth/login');
+  };
+  const handleHome = () => {
+    navigate('/');
   };
   const toggleDrawer = open => () => {
     setDrawerOpen(open);
   };
 
   const drawerContent = (
-    <Box 
-      sx={{ 
-        width: 250, 
-        backgroundColor: '#333', // Зміна кольору фону
-        height: '100%', // Зайняти всю висоту
-        color: '#fff', // Білий текст для контрасту
-      }}
-    >
-      <List>
-        <ListItem button component="a" href="https://misteram.com.ua/chernigov/orangebar" target="_blank" rel="noreferrer">
-          <ListItemText primary="ДОСТАВКА" sx={{ color: '#fff' }} />
+  <Box
+    sx={{
+      width: 250,
+      backgroundColor: '#333',
+      height: '100%',
+      color: '#fff',
+    }}
+    role="presentation"
+    onClick={toggleDrawer(false)}
+    onKeyDown={toggleDrawer(false)}
+  >
+    <List>
+      <ListItem
+        button
+        component="a"
+        href="https://misteram.com.ua/chernigov/orangebar"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <ListItemText primary="ДОСТАВКА" sx={{ color: '#fff' }} />
+      </ListItem>
+      <ListItem button component="a" href="tel:+380936900699">
+        <ListItemText primary="+380936900699" sx={{ color: '#fff' }} />
+      </ListItem>
+      <ListItem
+        button
+        component="a"
+        href="https://instagram.com/orangery.lounge?igshid=YmMyMTA2M2Y="
+        target="_blank"
+        rel="noreferrer"
+      >
+        <ListItemText primary="Instagram" sx={{ color: '#fff' }} />
+      </ListItem>
+
+      {/* Додаємо розділювач */}
+      <hr style={{ borderColor: '#555', margin: '10px 0' }} />
+
+      {/* Кнопки входу / виходу */}
+      {isAuth ? (
+        <ListItem button onClick={handleLogout}>
+          <ListItemText primary={`Вийти (${fullName})`} sx={{ color: '#fff' }} />
         </ListItem>
-        <ListItem button component="a" href="tel:+380936900699">
-          <ListItemText primary="+380936900699" sx={{ color: '#fff' }} />
+      ) : (
+        <ListItem button onClick={() => { navigate('/auth/login'); setDrawerOpen(false); }}>
+          <ListItemText primary="Увійти" sx={{ color: '#fff' }} />
         </ListItem>
-        <ListItem button component="a" href="https://instagram.com/orangery.lounge?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer">
-          <ListItemText primary="Instagram" sx={{ color: '#fff' }} />
-        </ListItem>
-      </List>
-    </Box>
-  );
+      )}
+    </List>
+  </Box>
+);
 
   return (
     <>
-      <AppBar 
+      <AppBar
         position="fixed"
         sx={{ backgroundColor: '#333', boxShadow: 'none' }}
       >
@@ -98,20 +133,34 @@ const handleSignIn = () => {
               <MenuIcon />
             </IconButton>
           </Box>
-          <img src={logo} alt="logo" className={s.logo}/>
+
           {isAuth ? (
-        <div>
-          <p>Ласкаво просимо, {fullName}!</p>
-          <button onClick={handleLogout}>Вийти</button>
-        </div>
-      ) : (
-        <button type="button" onClick={handleSignIn}>
-          signIn
-        </button>
-      )}
-          
+            <div className={s.wellcome}>
+              <p>Ласкаво просимо, {fullName}!</p>
+              <LogoutButton onLogout={handleLogout} className={s.logoutBtn}/>
+            </div>
+          ) : (
+            location.pathname !== '/auth/login' &&
+            location.pathname !== '/auth/register' && (
+              <div className={s.center}>
+                <button className={s.btn} onClick={handleSignIn}>
+                  <svg viewBox="0 0 150 30" className={s.border}>
+                    <polyline
+                      points="149,1 149,29 1,29 1,1 149,1"
+                      className={s.bgline}
+                    />
+                    <polyline
+                      points="149,1 149,29 1,29 1,1 149,1"
+                      className={s.hlline}
+                    />
+                  </svg>
+                  <span>Увійти</span>
+                </button>
+              </div>
+            )
+          )}
+          <img src={logo} alt="logo" className={s.logo} onClick={handleHome} />
         </Toolbar>
-       
       </AppBar>
 
       {/* Drawer для мобільного меню */}

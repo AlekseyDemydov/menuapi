@@ -80,6 +80,10 @@
   display: flex;
   flex-direction: column;
   text-align: end;
+  width: 125px;
+  @media (min-width: 320px) and (max-width: 760px) {
+    width: 87px;
+  }
 }
 .newWord {
   // margin-left: 10px;
@@ -91,6 +95,8 @@
   border-radius: 5px;
   text-transform: uppercase;
   position: absolute;
+  bottom: 7px;
+    right: -85px;
   @media (min-width: 320px) and (max-width: 760px) {
     bottom: 7px;
     right: -85px;
@@ -105,6 +111,8 @@
   border-radius: 5px;
   text-transform: uppercase;
   position: absolute;
+  bottom: 7px;
+    right: -85px;
   @media (min-width: 320px) and (max-width: 760px) {
     bottom: -20px;
     right: -85px;

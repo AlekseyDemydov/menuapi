@@ -2,6 +2,7 @@ import s from './List.module.scss';
 import config from 'config';
 import oops from './img/oops.webp';
 import Like from '../Like/Like';
+import Comments from '../Comments/Comments';
 
 export const List = ({
   data,
@@ -67,6 +68,11 @@ export const List = ({
       <div className={s.userInteraction}>
         <Like
           likes={e.likes}
+          productId={e._id}
+          categoryId={categoryId}
+          subcategoryId={subcategoryId}
+        />
+        <Comments
           productId={e._id}
           categoryId={categoryId}
           subcategoryId={subcategoryId}
