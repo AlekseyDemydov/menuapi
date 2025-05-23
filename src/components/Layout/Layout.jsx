@@ -10,12 +10,12 @@ export const Layout = () => {
   
   return (
     <>
-      <div className={s.container}>
+
    
         <div className={s.body}>
           <Outlet  />
         </div>
-      </div>
+    
     </>
   );
 };

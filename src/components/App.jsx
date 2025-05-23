@@ -45,9 +45,11 @@ useEffect(() => {
   return (
     <AuthProvider>
       <Router>
-       
-        <div className={s.container}>
-           <Header />
+       <Header />
+        <div className={s.container}
+        //  style={{ border: '2px solid red', background: 'rgba(255,0,0,0.1)', minHeight: '100vh' }}
+         >
+           
           <CartProvider>
             <Routes>
               <Route path="/" element={<Layout />}>
