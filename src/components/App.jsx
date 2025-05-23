@@ -45,12 +45,13 @@ useEffect(() => {
   return (
     <AuthProvider>
       <Router>
-        <Header />
+       
         <div className={s.container}>
+           {/* <Header /> */}
           <CartProvider>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route index element={<Main menuData={menuData} />} />
+                {/* <Route index element={<Main menuData={menuData} />} /> */}
                 <Route path="admin" element={<Admin />} />
                 <Route path="auth/login" element={<Login />} />
                 <Route path="auth/register" element={<Register />} />

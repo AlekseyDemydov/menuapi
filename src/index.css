@@ -9,20 +9,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
- 
+
+  width: 100%;      /* ✅ Безпечніше */
+  min-height: 100vh;
+  overflow-x: hidden; /* 🔒 Заборонити горизонтальний скрол */
 }
 body::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-image: url('./components/img/fon.JPG');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
+  pointer-events: none; /* 🔒 Не блокуй кліки */
 }
 
 code {

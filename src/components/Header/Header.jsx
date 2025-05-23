@@ -98,9 +98,10 @@ const Header = () => {
     <>
       <AppBar
         position="fixed"
-        sx={{ backgroundColor: '#333', boxShadow: 'none' }}
+        sx={{ backgroundColor: '#333', boxShadow: 'none', width: '100vw', }}
       >
         <Toolbar>
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}>
             <Button
               color="inherit"
@@ -139,7 +140,7 @@ const Header = () => {
 
           {isAuth ? (
             <div className={s.wellcome}>
-              <p>Ласкаво просимо, {fullName}!</p>
+              <p>{fullName}</p>
               <LogoutButton onLogout={handleLogout} className={s.logoutBtn}/>
             </div>
           ) : (
