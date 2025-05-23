@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/menuapi/static/css/main.0beccc59.css",
-    "main.js": "/menuapi/static/js/main.187398c7.js",
+    "main.css": "/menuapi/static/css/main.8a4194da.css",
+    "main.js": "/menuapi/static/js/main.62a16425.js",
     "static/media/inst.png": "/menuapi/static/media/inst.da61275da83501aa7a6f.png",
     "static/media/Logo.png": "/menuapi/static/media/Logo.14a1ec15eb5127a888eb.png",
     "static/media/madeevolvesansevoMedium.otf": "/menuapi/static/media/madeevolvesansevoMedium.396833bc683a20fa9c9a.otf",
     "static/media/YsabeauSCMedium.ttf": "/menuapi/static/media/YsabeauSCMedium.dc5c222da04b499c7ae8.ttf",
     "static/media/fon.JPG": "/menuapi/static/media/fon.578268b2b0db8584e6c4.JPG",
     "static/media/SansationLight.ttf": "/menuapi/static/media/SansationLight.c0d37cac32ee23060372.ttf",
+    "static/media/messs.png": "/menuapi/static/media/messs.66e2abc1486e36f5857c.png",
     "static/media/oops.webp": "/menuapi/static/media/oops.24c7a47e5d0aa1aa8e55.webp",
     "index.html": "/menuapi/index.html",
-    "main.0beccc59.css.map": "/menuapi/static/css/main.0beccc59.css.map",
-    "main.187398c7.js.map": "/menuapi/static/js/main.187398c7.js.map"
+    "main.8a4194da.css.map": "/menuapi/static/css/main.8a4194da.css.map",
+    "main.62a16425.js.map": "/menuapi/static/js/main.62a16425.js.map"
   },
   "entrypoints": [
-    "static/css/main.0beccc59.css",
-    "static/js/main.187398c7.js"
+    "static/css/main.8a4194da.css",
+    "static/js/main.62a16425.js"
   ]
 }
