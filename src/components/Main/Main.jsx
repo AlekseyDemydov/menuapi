@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { motion } from 'framer-motion';
 import {
   Accordion,
@@ -7,10 +7,8 @@ import {
 } from '@radix-ui/react-accordion';
 import { List } from 'components/comp/List/List';
 import { Modal } from 'components/comp/Modal/Modal';
-import axios from 'axios';
-import config from 'config';
+
 import s from './Main.module.scss';
-import { Loader } from 'components/comp/Loader/Loader';
 
 const AnimatedAccordionContent = ({ children, isOpen }) => (
   <motion.div
@@ -25,29 +23,13 @@ const AnimatedAccordionContent = ({ children, isOpen }) => (
   </motion.div>
 );
 
-const Main = () => {
+const Main = ({menuData}) => {
   const [showModal, setShowModal] = useState(false);
   const [objectModal, setObjectModal] = useState({});
-  const [menuData, setMenuData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [openCategories, setOpenCategories] = useState({});
   const [openSubcategories, setOpenSubcategories] = useState({});
 
-  useEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        const response = await axios.get(`${config.baseURL}/api/products`);
 
-        setMenuData(response.data);
-      } catch (error) {
-        console.error('Error fetching menu data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchMenuData();
-  }, []);
 
   const dataModal = (title, price, text, src, category, description, zvd) => {
     toggleModal();
@@ -74,10 +56,8 @@ const Main = () => {
 
   return (
     <div className={s.main}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Accordion type="multiple" collapsible className={s.accordion}>
+      
+        <Accordion type="multiple"  className={s.accordion}>
           {menuData.map((category, categoryIndex) => (
             <AccordionItem
               key={category._id || categoryIndex}
@@ -117,7 +97,7 @@ const Main = () => {
                     category={category.category}
                   />
                 ) : (
-                  <Accordion type="multiple" collapsible>
+                  <Accordion type="multiple" >
                     {category.subcategories.map((subcategory, subIndex) => (
                       <AccordionItem
                         key={subcategory._id || subIndex}
@@ -173,7 +153,7 @@ const Main = () => {
             </AccordionItem>
           ))}
         </Accordion>
-      )}
+      
 
       {showModal && (
         <Modal objectModal={objectModal} toggleModal={toggleModal} />

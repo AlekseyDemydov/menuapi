@@ -27,6 +27,9 @@ const Header = () => {
     setIsAuth(false);
     setFullName('');
     navigate('/'); // можеш змінити на "/auth/login" або інше
+    setTimeout(() => {
+        window.location.reload();
+      }, 300);
   };
   const location = useLocation();
   const handleSignIn = () => {

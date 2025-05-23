@@ -82,3 +82,20 @@
   padding: 8px 16px;
   cursor: pointer;
 }
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 30px; // підлаштуй під дизайн
+  height: auto;
+}
+
+.counter {
+  color: white;
+  font-size: 14px;
+}

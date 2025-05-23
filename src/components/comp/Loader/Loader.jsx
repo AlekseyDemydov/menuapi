@@ -1,8 +1,8 @@
-import './Loader.css'
+import s from './Loader.module.scss'
 
 export const Loader = () => {
  
     return (
-        <div class="loader">Loading...</div>
+        <div className={s.loader}>Loading...</div>
     );
 };
