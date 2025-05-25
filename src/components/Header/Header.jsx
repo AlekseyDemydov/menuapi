@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLocation } from 'react-router-dom';
 import LogoutButton from 'components/comp/LogoutBtn/LogoutButton';
+import { useCart } from 'react-use-cart';
+import cart from './img/cart.png';
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -28,12 +30,19 @@ const Header = () => {
     setFullName('');
     navigate('/'); // можеш змінити на "/auth/login" або інше
     setTimeout(() => {
-        window.location.reload();
-      }, 300);
+      window.location.reload();
+    }, 300);
   };
   const location = useLocation();
+  const { items } = useCart();
   const handleSignIn = () => {
     navigate('/auth/login');
+  };
+  const handleAdmin = () => {
+    navigate('/edit');
+  };
+  const handleCart = () => {
+    navigate('/cart');
   };
   const handleHome = () => {
     navigate('/');
@@ -43,65 +52,73 @@ const Header = () => {
   };
 
   const drawerContent = (
-  <Box
-    sx={{
-      width: 250,
-      backgroundColor: '#333',
-      height: '100%',
-      color: '#fff',
-    }}
-    role="presentation"
-    onClick={toggleDrawer(false)}
-    onKeyDown={toggleDrawer(false)}
-  >
-    <List>
-      <ListItem
-        button
-        component="a"
-        href="https://misteram.com.ua/chernigov/orangebar"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <ListItemText primary="ДОСТАВКА" sx={{ color: '#fff' }} />
-      </ListItem>
-      <ListItem button component="a" href="tel:+380936900699">
-        <ListItemText primary="+380936900699" sx={{ color: '#fff' }} />
-      </ListItem>
-      <ListItem
-        button
-        component="a"
-        href="https://instagram.com/orangery.lounge?igshid=YmMyMTA2M2Y="
-        target="_blank"
-        rel="noreferrer"
-      >
-        <ListItemText primary="Instagram" sx={{ color: '#fff' }} />
-      </ListItem>
-
-      {/* Додаємо розділювач */}
-      <hr style={{ borderColor: '#555', margin: '10px 0' }} />
-
-      {/* Кнопки входу / виходу */}
-      {isAuth ? (
-        <ListItem button onClick={handleLogout}>
-          <ListItemText primary={`Вийти (${fullName})`} sx={{ color: '#fff' }} />
+    <Box
+      sx={{
+        width: 250,
+        backgroundColor: '#333',
+        height: '100%',
+        color: '#fff',
+      }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <ListItem
+          button
+          component="a"
+          href="https://misteram.com.ua/chernigov/orangebar"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <ListItemText primary="ДОСТАВКА" sx={{ color: '#fff' }} />
         </ListItem>
-      ) : (
-        <ListItem button onClick={() => { navigate('/auth/login'); setDrawerOpen(false); }}>
-          <ListItemText primary="Увійти" sx={{ color: '#fff' }} />
+        <ListItem button component="a" href="tel:+380936900699">
+          <ListItemText primary="+380936900699" sx={{ color: '#fff' }} />
         </ListItem>
-      )}
-    </List>
-  </Box>
-);
+        <ListItem
+          button
+          component="a"
+          href="https://instagram.com/orangery.lounge?igshid=YmMyMTA2M2Y="
+          target="_blank"
+          rel="noreferrer"
+        >
+          <ListItemText primary="Instagram" sx={{ color: '#fff' }} />
+        </ListItem>
+
+        {/* Додаємо розділювач */}
+        <hr style={{ borderColor: '#555', margin: '10px 0' }} />
+
+        {/* Кнопки входу / виходу */}
+        {isAuth ? (
+          <ListItem button onClick={handleLogout}>
+            <ListItemText
+              primary={`Вийти (${fullName})`}
+              sx={{ color: '#fff' }}
+            />
+          </ListItem>
+        ) : (
+          <ListItem
+            button
+            onClick={() => {
+              navigate('/auth/login');
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Увійти" sx={{ color: '#fff' }} />
+          </ListItem>
+        )}
+      </List>
+    </Box>
+  );
 
   return (
     <>
       <AppBar
         position="fixed"
-        sx={{ backgroundColor: '#333', boxShadow: 'none', width: '100vw', }}
+        sx={{ backgroundColor: '#333', boxShadow: 'none', width: '100vw' }}
       >
         <Toolbar>
-          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}>
             <Button
               color="inherit"
@@ -139,28 +156,39 @@ const Header = () => {
           </Box>
 
           {isAuth ? (
-            <div className={s.wellcome}>
-              <p>{fullName}</p>
-              <LogoutButton onLogout={handleLogout} className={s.logoutBtn}/>
-            </div>
+            <>
+              <div className={s.wellcome}>
+                <p>{fullName}</p>
+                <LogoutButton onLogout={handleLogout} className={s.logoutBtn} />
+              </div>
+              <p onClick={handleAdmin}>edit</p>
+              <span onClick={handleCart} className={s.cart}>
+                <img src={cart} alt="cart" />
+                {items.length > 0 && (
+                  <span className={s.badge}>{items.length}</span>
+                )}
+              </span>
+            </>
           ) : (
             location.pathname !== '/auth/login' &&
             location.pathname !== '/auth/register' && (
-              <div className={s.center}>
-                <button className={s.btn} onClick={handleSignIn}>
-                  <svg viewBox="0 0 150 30" className={s.border}>
-                    <polyline
-                      points="149,1 149,29 1,29 1,1 149,1"
-                      className={s.bgline}
-                    />
-                    <polyline
-                      points="149,1 149,29 1,29 1,1 149,1"
-                      className={s.hlline}
-                    />
-                  </svg>
-                  <span>Увійти</span>
-                </button>
-              </div>
+              <>
+                <div className={s.center}>
+                  <button className={s.btn} onClick={handleSignIn}>
+                    <svg viewBox="0 0 150 30" className={s.border}>
+                      <polyline
+                        points="149,1 149,29 1,29 1,1 149,1"
+                        className={s.bgline}
+                      />
+                      <polyline
+                        points="149,1 149,29 1,29 1,1 149,1"
+                        className={s.hlline}
+                      />
+                    </svg>
+                    <span>Увійти</span>
+                  </button>
+                </div>
+              </>
             )
           )}
           <img src={logo} alt="logo" className={s.logo} onClick={handleHome} />

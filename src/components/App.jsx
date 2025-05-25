@@ -6,12 +6,15 @@ import { Navigate, Route, Routes, HashRouter as Router } from 'react-router-dom'
 import Header from './Header/Header';
 import Main from './Main/Main';
 import s from './App.module.scss';
-import Admin from './Admin/Admin';
+
 import { Layout } from './Layout/Layout';
 import Login from './Login/Login';
 import Register from './Registration/Register';
 import { AuthProvider } from './context/AuthContext';
 import { Loader } from './comp/Loader/Loader';
+import Editing from './Editing/Editing';
+import Cart from './comp/Cart/Cart';
+import { OrderForm } from './comp/OrderForm/OrderForm';
 
 
 export const App = () => {
@@ -43,6 +46,7 @@ useEffect(() => {
   }
 
   return (
+  <CartProvider>
     <AuthProvider>
       <Router>
        <Header />
@@ -50,19 +54,22 @@ useEffect(() => {
         //  style={{ border: '2px solid red', background: 'rgba(255,0,0,0.1)', minHeight: '100vh' }}
          >
            
-          <CartProvider>
+          
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<Main menuData={menuData} />} />
-                <Route path="admin" element={<Admin />} />
+                <Route path="edit" element={<Editing />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="order" element={<OrderForm />} />
                 <Route path="auth/login" element={<Login />} />
                 <Route path="auth/register" element={<Register />} />
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-          </CartProvider>
+          
         </div>
       </Router>
     </AuthProvider>
+    </CartProvider>
   );
 };

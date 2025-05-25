@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import config from 'config';
-import s from './Admin.module.scss';
+import s from './Editing.module.scss';
 import { Loader } from 'components/comp/Loader/Loader';
 
-const Admin = () => {
+const Editing = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -22,7 +22,7 @@ const Admin = () => {
     text: '',
     description: '',
     zvd: '',
-    isNew: false,
+    isNewProduct: false,
     categoryId: '',
     subcategoryId: '',
     category: '',
@@ -71,7 +71,7 @@ const Admin = () => {
     if (product) {
       setFormData({
         ...product,
-        isNew: Boolean(product.isNew),
+        isNewProduct: Boolean(product.isNewProduct),
       });
     } else {
       setFormData({
@@ -82,7 +82,7 @@ const Admin = () => {
         text: '',
         description: '',
         zvd: '',
-        isNew: false,
+        isNewProduct: false,
         categoryId: '',
         subcategoryId: '',
         category: '',
@@ -303,7 +303,7 @@ const Admin = () => {
               <td>{product.text}</td>
               <td>{product.description}</td>
               <td>{product.zvd}</td>
-              <td>{product.isNew ? 'Так' : 'Ні'}</td>
+              <td>{product.isNewProduct ? 'Так' : 'Ні'}</td>
               <td>
                 <button onClick={() => openModal(product)}>Редагувати</button>
               </td>
@@ -332,7 +332,7 @@ const Admin = () => {
               <td>{product.text}</td>
               <td>{product.description}</td>
               <td>{product.zvd}</td>
-              <td>{product.isNew ? 'Так' : 'Ні'}</td>
+              <td>{product.isNewProduct ? 'Так' : 'Ні'}</td>
               <td>
                 <button onClick={() => openModal(product)}>Редагувати</button>
               </td>
@@ -497,14 +497,14 @@ const Admin = () => {
                 name="zvd"
                 value={formData.zvd}
                 onChange={handleChange}
-                placeholder="ЗВД"
+                placeholder="(room, orangery, orange)"
               />
               <label>
                 Новий продукт
                 <input
                   type="checkbox"
-                  name="isNew"
-                  checked={formData.isNew}
+                  name="isNewProduct"
+                  checked={formData.isNewProduct}
                   onChange={handleChange}
                 />
               </label>
@@ -517,4 +517,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Editing;

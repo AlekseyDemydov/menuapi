@@ -9,11 +9,30 @@ const Register = () => {
     fullName: '',
     email: '',
     password: '',
+    phone: '+380', // початкове значення з кодом України
   });
+
   const [message, setMessage] = useState({ text: '', type: '' });
   const navigate = useNavigate();
+
   const handleChange = e => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    let { name, value } = e.target;
+
+    if (name === 'phone') {
+      // Забороняємо стерти +380, якщо користувач починає вводити телефон
+      if (!value.startsWith('+380')) {
+        value = '+380';
+      }
+      // Дозволяємо тільки цифри після +380
+      const onlyNumbers = value.slice(4).replace(/\D/g, '');
+
+      // Обмежуємо довжину введення 9 цифр після +380
+      const trimmedNumbers = onlyNumbers.slice(0, 9);
+
+      value = '+380' + trimmedNumbers;
+    }
+
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async e => {
@@ -32,7 +51,7 @@ const Register = () => {
       setTimeout(() => {
         navigate('/');
       }, 400);
-      
+
       setTimeout(() => {
         window.location.reload();
       }, 500);
@@ -42,6 +61,11 @@ const Register = () => {
 
         if (errMsg.toLowerCase().includes('email')) {
           setMessage({ text: 'Цей email вже зареєстрований', type: 'error' });
+        } else if (errMsg.toLowerCase().includes('phone')) {
+          setMessage({
+            text: 'Цей телефон вже зареєстрований або некоректний',
+            type: 'error',
+          });
         } else {
           setMessage({
             text: errMsg || 'Помилка при реєстрації',
@@ -70,6 +94,22 @@ const Register = () => {
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className={s.register__group}>
+          <label className={s.register__label} htmlFor="phone">
+            Телефон
+          </label>
+          <input
+            className={s.register__input}
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            pattern="\+380\d{9}"
             required
           />
         </div>

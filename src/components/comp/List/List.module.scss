@@ -148,3 +148,61 @@
   width: 100%;
   display: flex;
 }
+
+.addToCartBtn {
+  background: #1c1c1c;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #444;
+  }
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.qtyBtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+  &:active {
+    background-color: #003f7f;
+  }
+}
+
+.quantityInput {
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 3px #007bff;
+  }
+}
